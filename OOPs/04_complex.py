@@ -39,16 +39,23 @@ class ComplexNumber:
         return ans
 
     # __mul__ is a Magic Method for multiplying two ComplexNumber objects
-    def __mul__(self,other):
+    def __mul__(self, other):
+        # Formula: (a + bi) * (c + di) = (ac - bd) + (ad + bc)i
         realResult = self.real * other.real - self.imag * other.imag
         imagResult = self.real * other.imag + other.real * self.imag
-        ans = ComplexNumber(realResult,imagResult)
+
+        # Create a new ComplexNumber object with the result
+        ans = ComplexNumber(realResult, imagResult)
         return ans
-    
-    def __truediv__(self,other):
+
+    # __truediv__ is a Magic Method for dividing two ComplexNumber objects
+    def __truediv__(self, other):
+        # Denominator: c^2 + d^2 (where other = c + di)
         den = other.real * other.real + other.imag * other.imag
 
-        ans = self * ComplexNumber(other.real/den,(-1*other.imag)/den)
+        # Division formula:
+        # (a + bi) / (c + di) = (a + bi) * (c/(c^2+d^2) - di/(c^2+d^2))
+        ans = self * ComplexNumber(other.real / den, (-1 * other.imag) / den)
         return ans
 
     # Method to return the conjugate of the complex number
